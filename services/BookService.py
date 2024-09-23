@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from fastapi import Depends
+from fastapi import Depends, HTTPException
 from models.AuthorModel import Author
 from models.BookModel import Book
 
@@ -31,10 +31,11 @@ class BookService:
         )
 
     def delete(self, book_id: int) -> None:
-        return self.bookRepository.delete(Book(id=book_id))
+        book = self.get_book_or_404(book_id)
+        self.bookRepository.delete(book)
 
     def get(self, book_id: int) -> Book:
-        return self.bookRepository.get(Book(id=book_id))
+        return self.get_book_or_404(book_id)
 
     def list(
         self,
@@ -42,31 +43,29 @@ class BookService:
         pageSize: Optional[int] = 100,
         startIndex: Optional[int] = 0,
     ) -> List[Book]:
-        return self.bookRepository.list(
-            name, pageSize, startIndex
-        )
+        return self.bookRepository.list(name, pageSize, startIndex)
 
     def update(
         self, book_id: int, book_body: BookSchema
     ) -> Book:
+        book = self.get_book_or_404(book_id)
         return self.bookRepository.update(
             book_id, Book(name=book_body.name)
         )
 
     def get_authors(self, book_id: int) -> List[Author]:
-        return self.bookRepository.get(
-            Book(id=book_id)
-        ).authors
+        book = self.get_book_or_404(book_id)
+        return book.authors
 
     def add_author(
         self,
         book_id: int,
         author_body: BookAuthorPostRequestSchema,
     ) -> List[Author]:
-        author = self.authorRepository.get(
-            Author(id=author_body.author_id)
-        )
-        book = self.bookRepository.get(Book(id=book_id))
+        author = self.authorRepository.get(Author(id=author_body.author_id))
+        book = self.get_book_or_404(book_id)
+        if author is None:
+            raise HTTPException(status_code=404, detail="Author not found")
         book.authors.append(author)
         self.bookRepository.update(book_id, book)
 
@@ -75,11 +74,14 @@ class BookService:
     def remove_author(
         self, book_id: int, author_id: int
     ) -> List[Author]:
-        book = self.bookRepository.get(Book(id=book_id))
-        book.authors = filter(
-            lambda author: author.id != author_id,
-            book.authors,
-        )
+        book = self.get_book_or_404(book_id)
+        book.authors = list(filter(lambda author: author.id != author_id, book.authors))
         self.bookRepository.update(book_id, book)
 
         return book.authors
+
+    def get_book_or_404(self, book_id: int) -> Book:
+        book = self.bookRepository.get(Book(id=book_id))
+        if book is None:
+            raise HTTPException(status_code=404, detail="Book not found")
+        return book
