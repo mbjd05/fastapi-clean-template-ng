@@ -3,6 +3,8 @@ import asyncio
 import uvicorn
 import argparse
 
+import winloop.loop
+
 from main import app
 
 
@@ -22,14 +24,10 @@ if __name__ == "__main__":
 
     if sys.platform == 'win32':
         if not reload_choice:
-            import winloop
-            winloop.install()
-            loop = asyncio.new_event_loop()
-            asyncio.set_event_loop(loop)
-
-            config = uvicorn.Config(app=app, host="127.0.0.1", port=8000, loop=loop, reload=False)
+            # When reload is off, use winloop
+            config = uvicorn.Config(app=app, host="127.0.0.1", port=8000, reload=False)
             server = uvicorn.Server(config)
-            loop.run_until_complete(server.serve())
+            winloop.run(server.serve())
         else:
             # When reload is on, use asyncio's default event loop
             uvicorn.run("main:app", host="127.0.0.1", loop="asyncio", port=8000, reload=True)
