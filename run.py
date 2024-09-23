@@ -1,17 +1,11 @@
 import sys
-import asyncio
 import uvicorn
 import argparse
-
-import winloop.loop
-
+import winloop
 from main import app
 
-
-# Function to parse command-line arguments
 def parse_args():
     parser = argparse.ArgumentParser(description="Run the FastAPI app with optional reload mode.")
-    # --reload is True by default, and --no-reload can disable it
     parser.add_argument("--reload", action="store_true", default=True,
                         help="Enable hot reload mode (default: enabled).")
     parser.add_argument("--no-reload", action="store_false", dest="reload", help="Disable hot reload mode.")
@@ -20,7 +14,7 @@ def parse_args():
 
 
 if __name__ == "__main__":
-    reload_choice = parse_args()  # Get the --reload or --no-reload argument value (True/False)
+    reload_choice = parse_args()
 
     if sys.platform == 'win32':
         if not reload_choice:
