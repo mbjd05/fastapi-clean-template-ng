@@ -7,10 +7,13 @@ name = "pypi"
 fastapi = "==0.115.0"
 sqlalchemy = "==2.0.35"
 mysqlclient = "==2.2.4"
-uvicorn = {version = "==0.30.6", markers = "sys_platform != 'win32'"}  # Exclude on Windows
+uvicorn = {version = "==0.30.6", markers = "sys_platform != 'win32'"}  # Exclude on Windows, install manually with --no-binary uvicorn
+uvloop = {version = "==0.20.0", markers = "sys_platform != 'win32'"}  # Exclude on Windows
+winloop = {version = "==0.1.6", markers = "sys_platform == 'win32'"}  # Include on Windows
 python-dotenv = "==1.0.1"
 strawberry-graphql = {extras = ["fastapi"], version = "==0.242.0"}
 psycopg2 = "==2.9.9"
+pydantic-settings = "==2.5.2"
 
 [dev-packages]
 pre-commit = "==3.5.0"
