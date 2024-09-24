@@ -1,7 +1,6 @@
 import sys
 import uvicorn
 import argparse
-import winloop
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Run the FastAPI app with optional reload mode.")
@@ -23,6 +22,7 @@ if __name__ == "__main__":
     if sys.platform == 'win32':
         if not reload_choice:
             # When reload is off, use winloop (no loop_type provided)
+            import winloop
             winloop.run(run_uvicorn(reload_choice))
         else:
             # When reload is on, use asyncio's default event loop
