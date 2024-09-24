@@ -37,7 +37,7 @@ All actual work was done for Python 3.8 by [0xTheProDev](https://github.com/0xTh
   ```sh
   $ pipenv run python run.py --no-reload
   ```
-(This enables the faster `winloop` event-loop on Windows)
+  (This enables the faster `winloop` event-loop on Windows)
 
 - You can also open a shell inside virtual environment:
 
