@@ -50,3 +50,6 @@ pythonpath = [
 testpaths = [
   "__tests__"
 ]
+
+[tool.uv.scripts]
+run = "uv run run.py" # run^3!
