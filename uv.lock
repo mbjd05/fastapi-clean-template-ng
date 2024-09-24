@@ -150,7 +150,7 @@ dependencies = [
     { name = "python-dotenv" },
     { name = "sqlalchemy" },
     { name = "strawberry-graphql", extra = ["fastapi"] },
-    { name = "uvicorn", marker = "sys_platform != 'win32'" },
+    { name = "uvicorn" },
     { name = "uvloop", marker = "sys_platform != 'win32'" },
     { name = "winloop", marker = "sys_platform == 'win32'" },
 ]
@@ -178,7 +178,7 @@ requires-dist = [
     { name = "sqlalchemy", specifier = ">=2.0.35" },
     { name = "strawberry-graphql", extras = ["debug-server"], marker = "extra == 'dev'", specifier = ">=0.242.0" },
     { name = "strawberry-graphql", extras = ["fastapi"], specifier = ">=0.242.0" },
-    { name = "uvicorn", marker = "sys_platform != 'win32'", specifier = ">=0.30.6" },
+    { name = "uvicorn", specifier = ">=0.30.6" },
     { name = "uvloop", marker = "sys_platform != 'win32'", specifier = ">=0.20.0" },
     { name = "winloop", marker = "sys_platform == 'win32'", specifier = ">=0.1.6" },
 ]
