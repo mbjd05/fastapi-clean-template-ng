@@ -9,7 +9,7 @@ fastapi = ">=0.115.0"
 sqlalchemy = ">=2.0.35"
 mysqlclient = ">=2.2.4"
 uvicorn = {version = ">=0.30.6", markers = "sys_platform != 'win32'"}
-winloop = {version = ">=0.1.6", markers = "sys_platform >= 'win32'"}
+winloop = {version = ">=0.1.6", markers = "sys_platform == 'win32'"}
 uvloop = {version = ">=0.20.0", markers = "sys_platform != 'win32'"}
 python-dotenv = ">=1.0.1"
 strawberry-graphql = {version = ">=0.242.0", extras = ["fastapi"]}
