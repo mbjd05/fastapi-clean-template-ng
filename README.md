@@ -1,10 +1,20 @@
-# fastapi-clean-example
+# fastapi-clean-template-ng
 
 ## Description
 
 _Example Application Interface using FastAPI framework in Python 3_
 
 This example showcases Repository Pattern in Hexagonal Architecture _(also known as Clean Architecture)_. Here we have two Entities - Books and Authors, whose relationships have been exploited to create CRUD endpoint in REST under OpenAPI standard.
+
+## About this fork
+
+All actual work was done for Python 3.8 by [0xTheProDev](https://github.com/0xTheProDev), in his amazing [fastapi-clean-example](https://github.com/0xTheProDev/fastapi-clean-example). I just did the following to update it to 3.12:
+- Update dependencies to Python 3.12 versions.
+- remove outdated dependencies and install their newer equivalents (pydantic => pydantic-settings).
+- Make pipfile install on Windows (the pipfile no longer tries to install the unsupported `uvloop` as a dep to `uvicorn` on Windows).
+- Install `winloop` instead of `uvloop` on windows for when no hot-reload is needed.
+- Add platform agnostic `run.py` entrypoint script with hot-reloading by default and an optional `--no-reload` flag, which automatically picks the optimal event loop to use depending on current platform and 'reload choice'.
+- update installation instructions to clarify the process for Windows.
 
 ## Installation
 
@@ -13,7 +23,7 @@ This example showcases Repository Pattern in Hexagonal Architecture _(also known
   ```sh
   $ pipenv install --dev
   ```
-  - If you're on Windows, install `uvicorn` manually afterwards, without uvloop, which doesn't run on Windows. (run.py will use `winloop` instead):
+  - If you're on Windows, install `uvicorn` manually afterwards, without uvloop, which doesn't run on Windows. `run.py` will use `winloop` instead when using the `--no-reload` flag, as it unfortunately does not support `uvicorn`'s hot-reloading at this time. If you want hot-reloading, the default `asyncio` event-loop will be used automatically instead by ommiting the flag.
  
     ```sh
     $  pipenv run pip install uvicorn --no-binary uvicorn
@@ -23,6 +33,11 @@ This example showcases Repository Pattern in Hexagonal Architecture _(also known
   ```sh
   $ pipenv run python run.py
   ```
+- Run the server without hot-reloading:
+  ```sh
+  $ pipenv run python run.py --no-reload
+  ```
+  (This enables the faster `winloop` event-loop on Windows)
 
 - You can also open a shell inside virtual environment:
 
