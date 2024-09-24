@@ -1,9 +1,46 @@
+[project]
+name = "fastapi-clean-template-ng" # Replace with your actual project name
+version = "0.1.0" # Replace with your project version
+authors = ["M.B.J. Donners <532486@student.fontys.nl>"] # Replace with your details
+requires-python = ">=3.12"
+
+[tool.uv.dependencies]
+fastapi = ">=0.115.0"
+sqlalchemy = ">=2.0.35"
+mysqlclient = ">=2.2.4"
+uvicorn = {version = ">=0.30.6", markers = "sys_platform != 'win32'"}
+winloop = {version = ">=0.1.6", markers = "sys_platform >= 'win32'"}
+uvloop = {version = ">=0.20.0", markers = "sys_platform != 'win32'"}
+python-dotenv = ">=1.0.1"
+strawberry-graphql = {version = ">=0.242.0", extras = ["fastapi"]}
+psycopg2 = ">=2.9.9"
+pydantic-settings = ">=2.5.2"
+
+[tool.uv.dev-dependencies]
+pre-commit = ">=3.5.0"
+pytest = ">=8.3.3"
+pytest-cov = ">=5.0.0"
+black = ">=24.8.0"
+strawberry-graphql = {version = ">=0.242.0", extras = ["debug-server"]}
+
+[tool.uv.scripts]
+start = "python run.py"
+
 [tool.black]
 line-length = 60
 
 [tool.isort]
 profile = "black"
-src_paths = ["configs", "core", "dependencies", "models", "repositories", "routers", "schemas", "services"]
+src_paths = [
+  "configs",
+  "core",
+  "dependencies",
+  "models",
+  "repositories",
+  "routers",
+  "schemas",
+  "services"
+]
 virtual_env = "env"
 
 [tool.pytest.ini_options]
