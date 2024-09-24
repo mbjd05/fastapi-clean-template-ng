@@ -23,7 +23,7 @@ All actual work was done for Python 3.8 by [0xTheProDev](https://github.com/0xTh
   ```sh
   $ pipenv install --dev
   ```
-  - If you're on Windows, install `uvicorn` manually afterwards, without uvloop, which doesn't run on Windows. (run.py will use `winloop` instead):
+  - If you're on Windows, install `uvicorn` manually afterwards, without uvloop, which doesn't run on Windows. `run.py` will use `winloop` instead when using the `--no-reload` flag, as it unfortunately does not support `uvicorn`'s hot-reloading at this time. If you want hot-reloading, the default `asyncio` event-loop will be used automatically instead by ommiting the flag.
  
     ```sh
     $  pipenv run pip install uvicorn --no-binary uvicorn
@@ -33,6 +33,11 @@ All actual work was done for Python 3.8 by [0xTheProDev](https://github.com/0xTh
   ```sh
   $ pipenv run python run.py
   ```
+- Run the server without hot-reloading:
+  ```sh
+  $ pipenv run python run.py --no-reload
+  ```
+(This enables the faster `winloop` event-loop on Windows)
 
 - You can also open a shell inside virtual environment:
 
