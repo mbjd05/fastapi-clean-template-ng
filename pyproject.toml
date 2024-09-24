@@ -23,9 +23,6 @@ pytest-cov = ">=5.0.0"
 black = ">=24.8.0"
 strawberry-graphql = {version = ">=0.242.0", extras = ["debug-server"]}
 
-[tool.uv.scripts]
-start = "python run.py"
-
 [tool.black]
 line-length = 60
 
