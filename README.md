@@ -13,8 +13,8 @@ All actual work was done for Python 3.8 by [0xTheProDev](https://github.com/0xTh
 - remove outdated dependencies and install their newer equivalents (pydantic => pydantic-settings).
 - Make pipfile install on Windows (the pipfile no longer tries to install the unsupported `uvloop` as a dep to `uvicorn` on Windows).
 - Install `winloop` instead of `uvloop` on windows for when no hot-reload is needed.
-- Add platform agnostic `run.py` entrypoint script with hot-reloading by default and an optional `--no reload` flag, which automatically picks the optimal event loop to use depending on current platform and 'reload choice'
-- update installation instructions to clarify the process for Windows
+- Add platform agnostic `run.py` entrypoint script with hot-reloading by default and an optional `--no reload` flag, which automatically picks the optimal event loop to use depending on current platform and 'reload choice'.
+- update installation instructions to clarify the process for Windows.
 
 ## Installation
 
